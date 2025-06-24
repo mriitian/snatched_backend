@@ -1,0 +1,109 @@
+{
+  "electronics": [
+    {
+      "id": "pe1",
+      "name": "Premium Wireless Headphones",
+      "price": 299.99,
+      "description": "Our Premium Wireless Headphones combine superior sound quality with cutting-edge technology. The active noise cancellation creates a truly immersive listening experience, while the premium materials ensure comfort during extended use. Whether you're a music enthusiast or a professional needing crystal-clear audio, these headphones deliver exceptional performance.",
+      "imageLink": "https://drive.google.com/file/d/1Tzs6mxzif02RLexN5HNCq-fbsYerFb4-/view?usp=drive_link"
+    },
+    {
+      "id": "pe2",
+      "name": "Smart Watch Series 5",
+      "price": 249.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1N6ddWCG_MQYnynAHONuqouLXxHpnH_KG/view?usp=drive_link"
+    },
+    {
+      "id": "pe2",
+      "name": "Smart Watch Series 5",
+      "price": 249.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1N6ddWCG_MQYnynAHONuqouLXxHpnH_KG/view?usp=drive_link"
+    },
+    {
+      "id": "pe3",
+      "name": "Professional Camera Kit",
+      "price": 1299.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1bvDrAixyEZCfc9Ig-LZ29Sfn0Q6MoGIj/view?usp=sharing"
+    },
+    {
+      "id": "pe4",
+      "name": "Bluetooth Speaker",
+      "price": 89.99,
+      "description": "N.A",
+      "imageLink": "N.A"
+    },
+    {
+      "id": "pe5",
+      "name": "Wireless Gaming Mouse",
+      "price": 79.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1skKwrhF03LbQB62yeM_scEEZYBKJgm76/view?usp=drive_link"
+    }
+  ],
+  "fashion": [
+    {
+      "id": "f1",
+      "name": "Vintage Leather Backpack",
+      "startingBid": 129.00,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1uG3Lqjh0k4PDy9f0l19edz0he6RIHzf7/view?usp=drive_link"
+    },
+    {
+      "id": "f2",
+      "name": "Disigner Sunglasses",
+      "startingBid": 159.00,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1EcQozkSUWjOAfC5pV2RBcrqflLSQWeTt/view?usp=drive_link"
+    }
+  ],
+  "Home & Garden": [
+    {
+      "id": "hg1",
+      "name": "Ergonomic Office Chair",
+      "startingBid": 349.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1LqbwmKfmj9nn1J-vAEmHTBSJh04wbeaO/view?usp=drive_link"
+    },
+    {
+      "id": "f1",
+      "name": "Vintage Leather Backpack",
+      "startingBid": 129.00,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1RvH__8pXwSPzYvJnQaxXJz7WhpVDfa0I/view?usp=drive_link"
+    }
+  ],
+  "sports": [
+    {
+      "id": "s1",
+      "name": "Stainless Steel Water Bottle",
+      "startingBid": 24.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/1yPK2ERndMYkvhO5ZUTdVVVI4ojFOC5a4/view?usp=drive_link"
+    },
+    {
+      "id": "s2",
+      "name": "Fitness tracker",
+      "startingBid": 119.99,
+      "description": "N.A",
+      "imageLink": "https://drive.google.com/file/d/17VkGasSXVKnfz04bYu6_Ma1hcoZudvfo/view?usp=drive_link"
+    }
+  ],
+  "toys & games": [
+    
+  ],
+  "beauty & personal care": [
+    
+  ],
+  "automative": [
+    
+  ],
+  "books & media": [
+    
+  ],
+  "collectibles": [
+    
+  ]
+}

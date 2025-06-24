@@ -1,0 +1,66 @@
+{
+  "electronics": [
+    {
+      "id": "ae1",
+      "name": "Gaming console bundle",
+      "currentBid": 450.00,
+      "description": "",
+      "timeLeft": "12h",
+      "imageLink": "https://drive.google.com/file/d/1Ne4b95NWGu8J9zOh24C8KHqo_YtZa4AW/view?usp=drive_link"
+    },
+    {
+      "id": "ae2",
+      "name": "Professional DSLR Camera",
+      "currentBid": 780.00,
+      "description": "",
+      "timeLeft": "3h",
+      "imageLink": "https://drive.google.com/file/d/1iehUbobKIYkKIEF8U8O8nfbgQdfOgjvp/view?usp=drive_link"
+    }
+  ],
+  "collectibles": [
+    {
+      "id": "c1",
+      "name": "Vintage Vinyl Record Collection",
+      "currentBid": 120.50,
+      "description": "",
+      "timeLeft": "2h",
+      "imageLink": "https://drive.google.com/file/d/1hh3l5dWJKopfOwXw7kyGhvdkCIWnjs64/view?usp=drive_link"
+    },
+    {
+      "id": "c2",
+      "name": "Vintage Watch",
+      "currentBid": 420.00,
+      "description": "",
+      "timeLeft": "8h",
+      "imageLink": "https://drive.google.com/file/d/1hh3l5dWJKopfOwXw7kyGhvdkCIWnjs64/view?usp=drive_link"
+    }
+  ],
+  "fashion": [
+    {
+      "id": "af1",
+      "name": "Limited Edition Sneakers",
+      "currentBid": 320.00,
+      "description": "",
+      "timeLeft": "1d",
+      "imageLink": "https://drive.google.com/file/d/14uiKFbR00VMCiETot7VPp4TUi3quFnZ-/view?usp=drive_link"
+    },
+    {
+      "id": "af2",
+      "name": "Handcrafted Leather Wallet",
+      "currentBid": 65.00,
+      "description": "",
+      "timeLeft": "5h",
+      "imageLink": "https://drive.google.com/file/d/17FGXfVaTaJo51AxEWAV_C8ABGH5M8zF3/view?usp=drive_link"
+    }
+  ],
+  "home & garden": [
+    {
+      "id": "ahg1",
+      "name": "Art Deco Table Lamp",
+      "currentBid": 95.00,
+      "description": "",
+      "timeLeft": "6h",
+      "imageLink": "https://drive.google.com/file/d/15weACdpYishVc3NlEDzUNZ0n4obrmR8H/view?usp=drive_link"
+    }
+  ]
+}
