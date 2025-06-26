@@ -1,0 +1,164 @@
+[
+  {
+    "id": "pe1",
+    "name": "Premium Wireless Headphones",
+    "description": "Experience crystal-clear sound with our Premium Wireless Headphones. Featuring active noise cancellation, Bluetooth 5.0 connectivity, and up to 30 hours of battery life.",
+    "price": 299.99,
+    "discount": 15,
+    "originalPrice": 349.99,
+    "stock": 15,
+    "sku": "HDPHN-001",
+    "brand": "AudioTech",
+    "category": "Electronics",
+    "rating": 4.8,
+    "reviewCount": 142,
+    "images": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+      "https://images.unsplash.com/photo-1577174881658-0f30ed549adc",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b",
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90"
+    ],
+    "colors": ["Black", "White", "Blue"],
+    "features": [
+      "Active Noise Cancellation",
+      "Bluetooth 5.0",
+      "30-hour battery life",
+      "Memory foam ear cushions",
+      "Built-in microphone",
+      "1-year warranty"
+    ],
+    "specifications": {
+      "Dimensions": "7.5 × 6.5 × 3.2 inches",
+      "Weight": "0.55 lbs",
+      "Battery": "700mAh",
+      "Charging Time": "2 hours",
+      "Frequency Response": "20Hz-20kHz",
+      "Connectivity": "Bluetooth 5.0, 3.5mm jack"
+    },
+    "seller": {
+      "id": 101,
+      "name": "AudioTech Official",
+      "rating": 4.9,
+      "salesCount": 1543,
+      "joinedDate": "Jan 2020",
+      "verified": true
+    },
+    "reviews": [
+      {
+        "id": 1,
+        "name": "John Smith",
+        "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+        "rating": 5,
+        "date": "2 months ago",
+        "title": "Excellent sound quality",
+        "comment": "These headphones are amazing! The sound quality is crystal clear, and the noise cancellation works perfectly. Battery life is impressive too, lasted over 28 hours on a single charge."
+      },
+      {
+        "id": 2,
+        "name": "Sarah Johnson",
+        "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+        "rating": 4,
+        "date": "3 months ago",
+        "title": "Comfortable and stylish",
+        "comment": "Very comfortable to wear for long periods. The ear cushions are soft and don't cause discomfort even after hours of use. The design is sleek and modern."
+      },
+      {
+        "id": 3,
+        "name": "Robert Williams",
+        "avatar": "https://randomuser.me/api/portraits/men/46.jpg",
+        "rating": 5,
+        "date": "1 month ago",
+        "title": "Worth every penny",
+        "comment": "I was hesitant due to the price, but these headphones are worth every penny. The audio quality is superior to anything I've used before. Highly recommend for audiophiles!"
+      }
+    ]
+  },
+  {
+    "id": "pe2",
+    "name": "Smart Watch Series 5",
+    "description": "Keep track of your health and stay connected with the Smart Watch Series 5. Features a sleek design, real-time heart rate tracking, fitness analytics, and app notifications. Compatible with both iOS and Android.",
+    "price": 249.99,
+    "discount": 10,
+    "originalPrice": 279.99,
+    "stock": 20,
+    "sku": "SMRTWT-005",
+    "brand": "FitSmart",
+    "category": "Electronics",
+    "rating": 4.5,
+    "reviewCount": 97,
+    "images": [
+      "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8",
+      "https://images.unsplash.com/photo-1585386959984-a415522e3f56"
+    ],
+    "colors": ["Silver", "Black", "Rose Gold"],
+    "features": [
+      "Heart Rate Monitoring",
+      "Step Counter",
+      "Sleep Tracker",
+      "Water Resistant",
+      "Smart Notifications",
+      "Wireless Charging"
+    ],
+    "specifications": {
+      "Dimensions": "1.5 × 1.4 × 0.4 inches",
+      "Weight": "0.12 lbs",
+      "Battery": "350mAh",
+      "Charging Time": "1.5 hours",
+      "Display": "AMOLED",
+      "Compatibility": "iOS & Android"
+    },
+    "seller": {
+      "id": 201,
+      "name": "FitSmart India",
+      "rating": 4.6,
+      "salesCount": 1080,
+      "joinedDate": "Aug 2021",
+      "verified": true
+    },
+    "reviews": []
+  },
+  {
+    "id": "pe5",
+    "name": "Wireless Gaming Mouse",
+    "description": "Take your gaming performance to the next level with our Wireless Gaming Mouse. Designed for precision and speed, it features customizable DPI settings, RGB lighting, and ergonomic comfort for long gaming sessions.",
+    "price": 79.99,
+    "discount": 5,
+    "originalPrice": 84.99,
+    "stock": 35,
+    "sku": "GMOUSE-009",
+    "brand": "GamePro",
+    "category": "Electronics",
+    "rating": 4.7,
+    "reviewCount": 63,
+    "images": [
+      "https://images.unsplash.com/photo-1587202372775-b56cd9199bdb",
+      "https://images.unsplash.com/photo-1617709145199-81c84a022b8d"
+    ],
+    "colors": ["Black", "Red", "Gray"],
+    "features": [
+      "Adjustable DPI (600–12000)",
+      "RGB Lighting Effects",
+      "2.4GHz Wireless + USB-C",
+      "Ergonomic Grip",
+      "Long Battery Life",
+      "Programmable Buttons"
+    ],
+    "specifications": {
+      "Dimensions": "5.1 × 2.9 × 1.6 inches",
+      "Weight": "0.25 lbs",
+      "Battery": "500mAh",
+      "Charging Time": "1.2 hours",
+      "Connectivity": "Wireless USB Dongle, USB-C",
+      "Buttons": "7 programmable"
+    },
+    "seller": {
+      "id": 301,
+      "name": "GamePro Official",
+      "rating": 4.8,
+      "salesCount": 780,
+      "joinedDate": "Nov 2022",
+      "verified": true
+    },
+    "reviews": []
+  }
+]

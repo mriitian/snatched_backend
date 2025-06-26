@@ -2,8 +2,8 @@
   "electronics": [
     {
       "id": "ae1",
-      "name": "Gaming console bundle",
-      "currentBid": 450.00,
+      "name": "Gaming Console Bundle",
+      "currentBid": 450.0,
       "description": "",
       "timeLeft": "12h",
       "imageLink": "https://drive.google.com/file/d/1Ne4b95NWGu8J9zOh24C8KHqo_YtZa4AW/view?usp=drive_link"
@@ -11,35 +11,69 @@
     {
       "id": "ae2",
       "name": "Professional DSLR Camera",
-      "currentBid": 780.00,
+      "currentBid": 780.0,
       "description": "",
       "timeLeft": "3h",
       "imageLink": "https://drive.google.com/file/d/1iehUbobKIYkKIEF8U8O8nfbgQdfOgjvp/view?usp=drive_link"
+    },
+    {
+      "id": "ae3",
+      "name": "Smart Home Security System",
+      "startingBid": 350.0,
+      "description": "",
+      "startTime": "Tomorrow, 3:00 PM",
+      "imageLink": "https://images.unsplash.com/photo-1558002038-bb0237f4b52d"
+    },
+    {
+      "id": "ae4",
+      "name": "Smartphone Latest Model",
+      "finalBid": 650.0,
+      "description": "",
+      "endTime": "1 week ago",
+      "status": "lost",
+      "imageLink": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd"
     }
   ],
   "collectibles": [
     {
       "id": "c1",
       "name": "Vintage Vinyl Record Collection",
-      "currentBid": 120.50,
+      "currentBid": 120.5,
       "description": "",
       "timeLeft": "2h",
       "imageLink": "https://drive.google.com/file/d/1hh3l5dWJKopfOwXw7kyGhvdkCIWnjs64/view?usp=drive_link"
     },
     {
       "id": "c2",
-      "name": "Vintage Watch",
-      "currentBid": 420.00,
+      "name": "Vintage Watch Collection",
+      "currentBid": 420.0,
       "description": "",
       "timeLeft": "8h",
-      "imageLink": "https://drive.google.com/file/d/1hh3l5dWJKopfOwXw7kyGhvdkCIWnjs64/view?usp=drive_link"
+      "imageLink": "https://images.unsplash.com/photo-1524592094714-0f0654e20314"
+    },
+    {
+      "id": "cu1",
+      "name": "Rare Baseball Card Collection",
+      "startingBid": 500.0,
+      "description": "",
+      "startTime": "Tomorrow, 10:00 AM",
+      "imageLink": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55"
+    },
+    {
+      "id": "ch1",
+      "name": "Limited Edition Comic Book",
+      "finalBid": 420.0,
+      "description": "",
+      "endTime": "3 days ago",
+      "status": "lost",
+      "imageLink": "https://images.unsplash.com/photo-1608889825103-eb5ed706fc64"
     }
   ],
   "fashion": [
     {
       "id": "af1",
       "name": "Limited Edition Sneakers",
-      "currentBid": 320.00,
+      "currentBid": 320.0,
       "description": "",
       "timeLeft": "1d",
       "imageLink": "https://drive.google.com/file/d/14uiKFbR00VMCiETot7VPp4TUi3quFnZ-/view?usp=drive_link"
@@ -47,20 +81,66 @@
     {
       "id": "af2",
       "name": "Handcrafted Leather Wallet",
-      "currentBid": 65.00,
+      "currentBid": 65.0,
       "description": "",
       "timeLeft": "5h",
       "imageLink": "https://drive.google.com/file/d/17FGXfVaTaJo51AxEWAV_C8ABGH5M8zF3/view?usp=drive_link"
+    },
+    {
+      "id": "fh1",
+      "name": "Vintage Leather Jacket",
+      "finalBid": 280.0,
+      "description": "",
+      "endTime": "5 days ago",
+      "status": "won",
+      "imageLink": "https://images.unsplash.com/photo-1551028719-00167b16eac5"
     }
   ],
   "home & garden": [
     {
       "id": "ahg1",
       "name": "Art Deco Table Lamp",
-      "currentBid": 95.00,
+      "currentBid": 95.0,
       "description": "",
       "timeLeft": "6h",
       "imageLink": "https://drive.google.com/file/d/15weACdpYishVc3NlEDzUNZ0n4obrmR8H/view?usp=drive_link"
+    },
+    {
+      "id": "au1",
+      "name": "Handmade Quilt Set",
+      "startingBid": 120.0,
+      "description": "",
+      "startTime": "Tomorrow, 5:00 PM",
+      "imageLink": "https://images.unsplash.com/photo-1629949009710-2306baeb6dc7"
+    },
+    {
+      "id": "hg1",
+      "name": "Antique Crystal Chandelier",
+      "finalBid": 950.0,
+      "description": "",
+      "endTime": "2 days ago",
+      "status": "won",
+      "imageLink": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4"
+    }
+  ],
+  "sports": [
+    {
+      "id": "su1",
+      "name": "Outdoor Camping Gear Package",
+      "startingBid": 250.0,
+      "description": "",
+      "startTime": "May 22, 12:00 PM",
+      "imageLink": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4"
+    }
+  ],
+  "furniture": [
+    {
+      "id": "afur1",
+      "name": "Antique Wooden Desk",
+      "currentBid": 275.0,
+      "description": "",
+      "timeLeft": "4h",
+      "imageLink": "https://images.unsplash.com/photo-1530603907829-b3be93c9340f"
     }
   ]
 }
