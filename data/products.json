@@ -5,21 +5,21 @@
       "name": "Premium Wireless Headphones",
       "price": 299.99,
       "description": "Our Premium Wireless Headphones combine superior sound quality with cutting-edge technology. The active noise cancellation creates a truly immersive listening experience, while the premium materials ensure comfort during extended use. Whether you're a music enthusiast or a professional needing crystal-clear audio, these headphones deliver exceptional performance.",
-      "imageLink": "http://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/electronics-20250626T070935Z-1-001/electronics/premium-wireless-headphones.jpeg"
+      "imageLink": "http://raw.githubusercontent.com/mriitian/large-host/main/electronics-20250626T070935Z-1-001/electronics/premium-wireless-headphones.jpeg"
     },
     {
       "id": "pe2",
       "name": "Smart Watch Series 5",
       "price": 249.99,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/electronics-20250626T070935Z-1-001/electronics/smart-watch-series-5.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/electronics-20250626T070935Z-1-001/electronics/smart-watch-series-5.jpeg"
     },
     {
       "id": "pe3",
       "name": "Professional Camera Kit",
       "price": 1299.99,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/electronics-20250626T070935Z-1-001/electronics/professional-camera-kit.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/electronics-20250626T070935Z-1-001/electronics/professional-camera-kit.jpeg"
     },
     {
       "id": "pe4",
@@ -33,7 +33,7 @@
       "name": "Wireless Gaming Mouse",
       "price": 79.99,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/electronics-20250626T070935Z-1-001/electronics/wireless-gaming-mouse.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/electronics-20250626T070935Z-1-001/electronics/wireless-gaming-mouse.jpeg"
     }
   ],
   "fashion": [
@@ -42,14 +42,14 @@
       "name": "Vintage Leather Backpack",
       "startingBid": 129.0,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/Fashion/vintage-leather-backpack.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/Fashion/vintage-leather-backpack.jpeg"
     },
     {
       "id": "f2",
       "name": "Disigner Sunglasses",
       "startingBid": 159.0,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/Fashion/sunglasses.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/Fashion/sunglasses.jpeg"
     }
   ],
   "Home & Garden": [
@@ -58,14 +58,14 @@
       "name": "Ergonomic Office Chair",
       "startingBid": 349.99,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/Home%20%26%20Garden/chair.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/Home%20%26%20Garden/chair.jpeg"
     },
     {
       "id": "hg2",
       "name": "Indoor plant",
       "startingBid": 59.99,
       "description": "N.A",
-      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/Home%20%26%20Garden/indoor-plant.jpeg"
+      "imageLink": "https://raw.githubusercontent.com/mriitian/large-host/main/Home%20%26%20Garden/indoor-plant.jpeg"
     }
   ],
   "sports": [
@@ -81,7 +81,7 @@
       "name": "Fitness tracker",
       "startingBid": 119.99,
       "description": "N.A",
-      "imageLink": " https://raw.githubusercontent.com/mriitian/large-host/refs/heads/main/Sports/water-bottle.jpeg"
+      "imageLink": " https://raw.githubusercontent.com/mriitian/large-host/main/Sports/water-bottle.jpeg"
     }
   ],
   "toys & games": [],

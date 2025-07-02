@@ -13,14 +13,28 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_URI = process.env.DB_URI;
 let db;
+// ✅ Multiple allowed origins
+const allowedOrigins = [
+  "http://localhost:8080",
+  "https://snatched-brown.vercel.app",
+];
 
-// CORS config
+var currentOrigin = "";
+// ✅ Dynamic CORS config
 app.use(
   cors({
-    origin: "http://localhost:8080", // ✅ exact origin
-    credentials: true, // ✅ required for cookies/sessions
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // Allow curl or mobile apps
+      currentOrigin = origin;
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
   })
 );
+
 app.use(express.json());
 
 app.use(
@@ -101,10 +115,10 @@ app.get(
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "http://localhost:8080/",
-    failureRedirect: "http://localhost:8080/login",
-  })
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect(`${currentOrigin || "http://localhost:8080"}`);
+  }
 );
 
 app.get("/auth/user", (req, res) => {
@@ -191,7 +205,7 @@ app.post("/login", async (req, res) => {
 
     // Optional: Generate JWT token
     const token = jwt.sign(
-      { id: user._id.toString() },
+      { id: user._id.toString(), email: user.email },
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
@@ -299,6 +313,311 @@ app.put("/user/:email", async (req, res) => {
   }
 });
 
+// Get all product listings
+app.get("/products", async (req, res) => {
+  try {
+    const products = await db.collection("products").find().toArray();
+    res.status(200).json(products);
+  } catch (err) {
+    console.error("❌ Error fetching products:", err);
+    res.status(500).json({ error: "Failed to fetch products." });
+  }
+});
+
+// Get detailed product info by ID
+app.get("/details/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const detail = await db.collection("details").findOne({ id });
+    if (!detail) {
+      return res.status(404).json({ error: "Product detail not found." });
+    }
+
+    res.status(200).json(detail);
+  } catch (err) {
+    console.error("❌ Error fetching product detail:", err);
+    res.status(500).json({ error: "Failed to fetch product detail." });
+  }
+});
+
+app.get("/search", async (req, res) => {
+  const q = req.query.q?.toString().toLowerCase() || "";
+
+  try {
+    // Fetch the single document
+    const allCategoriesDoc = await db.collection("products").findOne({});
+
+    if (!allCategoriesDoc) {
+      return res.json([]);
+    }
+
+    let allProducts = [];
+
+    // Loop all category arrays
+    for (const [category, products] of Object.entries(allCategoriesDoc)) {
+      if (Array.isArray(products)) {
+        allProducts.push(
+          ...products.map((p) => ({
+            ...p,
+            category,
+          }))
+        );
+      }
+    }
+
+    // Filter products matching the search query
+    const matchingProducts = allProducts.filter((p) =>
+      p.name?.toLowerCase().includes(q)
+    );
+
+    res.json(matchingProducts);
+  } catch (err) {
+    console.error("❌ Search error:", err);
+    res.status(500).json({ error: "Search failed." });
+  }
+});
+
+// auction products
+app.get("/auctions", async (req, res) => {
+  try {
+    const auctions = await db.collection("auctions").find().toArray();
+    res.status(200).json(auctions);
+  } catch (err) {
+    console.error("❌ Error fetching products:", err);
+    res.status(500).json({ error: "Failed to fetch products." });
+  }
+});
+
+app.post("/cart", async (req, res) => {
+  let userEmail;
+
+  // Check Google OAuth user
+  if (req.user && req.user.email) {
+    userEmail = req.user.email;
+  } else {
+    // Check JWT token
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith("Bearer ")) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const userId = decoded.id;
+
+      const user = await db
+        .collection("users")
+        .findOne({ _id: new ObjectId(userId) });
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found." });
+      }
+      userEmail = user.email;
+    } catch (err) {
+      console.error("❌ Add to cart error:", err);
+      return res.status(401).json({ error: "Invalid or expired token" });
+    }
+  }
+
+  const { productId, quantity, selectedColor } = req.body;
+
+  if (!productId || !quantity) {
+    return res
+      .status(400)
+      .json({ error: "Product ID and quantity are required." });
+  }
+
+  try {
+    const cartCollection = db.collection("cart");
+
+    let cartDoc = await cartCollection.findOne({ userEmail });
+
+    if (!cartDoc) {
+      await cartCollection.insertOne({
+        userEmail,
+        items: [
+          {
+            productId,
+            quantity,
+            selectedColor,
+          },
+        ],
+      });
+    } else {
+      const existingIndex = cartDoc.items.findIndex(
+        (item) =>
+          item.productId === productId && item.selectedColor === selectedColor
+      );
+
+      if (existingIndex !== -1) {
+        cartDoc.items[existingIndex].quantity += quantity;
+      } else {
+        cartDoc.items.push({
+          productId,
+          quantity,
+          selectedColor,
+        });
+      }
+
+      await cartCollection.updateOne(
+        { userEmail },
+        { $set: { items: cartDoc.items } }
+      );
+    }
+
+    res.status(200).json({ message: "Product added to cart!" });
+  } catch (err) {
+    console.error("❌ Add to cart error:", err);
+    res.status(500).json({ error: "Failed to add to cart." });
+  }
+});
+
+app.get("/cart", async (req, res) => {
+  try {
+    let userEmail = null;
+
+    if (req.user && req.user.email) {
+      userEmail = req.user.email;
+    } else {
+      const authHeader = req.headers.authorization;
+      if (authHeader?.startsWith("Bearer ")) {
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // ✅ fetch user by id
+        const user = await db
+          .collection("users")
+          .findOne({ _id: new ObjectId(decoded.id) });
+
+        if (user) {
+          userEmail = user.email;
+        }
+      }
+    }
+
+    if (!userEmail) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const cart = await db.collection("cart").findOne({ userEmail });
+
+    if (!cart) {
+      return res.status(200).json({ userEmail, items: [] });
+    }
+
+    res.status(200).json(cart);
+  } catch (err) {
+    console.error("❌ Error fetching cart:", err);
+    res.status(500).json({ error: "Failed to fetch cart." });
+  }
+});
+
+// PATCH /cart
+app.patch("/cart", async (req, res) => {
+  const { productId, selectedColor, quantity } = req.body;
+  console.log(req.body);
+  let userEmail = null;
+
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await db
+      .collection("users")
+      .findOne({ _id: new ObjectId(decoded.id) });
+    userEmail = user?.email;
+  }
+
+  if (!userEmail) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  // Update the quantity of the specific item
+  const result = await db.collection("cart").updateOne(
+    {
+      userEmail,
+      "items.productId": productId,
+      "items.selectedColor": selectedColor,
+    },
+    {
+      $set: {
+        "items.$.quantity": quantity,
+      },
+    }
+  );
+
+  res.status(200).json({ message: "Quantity updated" });
+});
+
+// DELETE /cart/item
+app.delete("/cart/item", async (req, res) => {
+  const { productId, selectedColor } = req.body;
+  let userEmail = null;
+
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await db
+      .collection("users")
+      .findOne({ _id: new ObjectId(decoded.id) });
+    userEmail = user?.email;
+  }
+
+  if (!userEmail) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const result = await db.collection("cart").updateOne(
+    { userEmail },
+    {
+      $pull: {
+        items: {
+          productId,
+          selectedColor,
+        },
+      },
+    }
+  );
+
+  res.status(200).json({ message: "Item removed" });
+});
+
+app.delete("/cart", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    let userEmail = null;
+
+    if (authHeader?.startsWith("Bearer ")) {
+      const token = authHeader.split(" ")[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      const user = await db
+        .collection("users")
+        .findOne({ _id: new ObjectId(decoded.id) });
+
+      if (user) {
+        userEmail = user.email;
+      }
+    }
+
+    if (!userEmail) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const result = await db
+      .collection("cart")
+      .updateOne({ userEmail }, { $set: { items: [] } });
+
+    return res.status(200).json({ message: "Cart cleared successfully" });
+  } catch (err) {
+    console.error("❌ Error clearing cart:", err);
+    res.status(500).json({ error: "Failed to clear cart" });
+  }
+});
+
 app.post("/orders", async (req, res) => {
   const order = req.body;
 
@@ -349,42 +668,163 @@ app.get("/orders/:email/:status", async (req, res) => {
   }
 });
 
-// Get all product listings
-app.get("/products", async (req, res) => {
-  try {
-    const products = await db.collection("products").find().toArray();
-    res.status(200).json(products);
-  } catch (err) {
-    console.error("❌ Error fetching products:", err);
-    res.status(500).json({ error: "Failed to fetch products." });
-  }
-});
+app.post("/wishlist", async (req, res) => {
+  let userEmail;
 
-// Get detailed product info by ID
-app.get("/details/:id", async (req, res) => {
-  const id = req.params.id;
-
-  try {
-    const detail = await db.collection("details").findOne({ id });
-    if (!detail) {
-      return res.status(404).json({ error: "Product detail not found." });
+  // Check for Google OAuth user
+  if (req.user && req.user.email) {
+    userEmail = req.user.email;
+  } else {
+    // Check for JWT token
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith("Bearer ")) {
+      return res.status(401).json({ error: "Unauthorized" });
     }
 
-    res.status(200).json(detail);
+    const token = authHeader.split(" ")[1];
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const userId = decoded.id;
+
+      const user = await db
+        .collection("users")
+        .findOne({ _id: new ObjectId(userId) });
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found." });
+      }
+      userEmail = user.email;
+    } catch (err) {
+      console.error("❌ Wishlist add error:", err);
+      return res.status(401).json({ error: "Invalid or expired token" });
+    }
+  }
+
+  const { productId, selectedColor } = req.body;
+
+  if (!productId) {
+    return res.status(400).json({ error: "Product ID is required." });
+  }
+
+  try {
+    const wishlistCollection = db.collection("wishlist");
+
+    let wishlistDoc = await wishlistCollection.findOne({ userEmail });
+
+    if (!wishlistDoc) {
+      await wishlistCollection.insertOne({
+        userEmail,
+        items: [{ productId, selectedColor }],
+      });
+    } else {
+      const alreadyExists = wishlistDoc.items.some(
+        (item) =>
+          item.productId === productId && item.selectedColor === selectedColor
+      );
+
+      if (!alreadyExists) {
+        wishlistDoc.items.push({ productId, selectedColor });
+
+        await wishlistCollection.updateOne(
+          { userEmail },
+          { $set: { items: wishlistDoc.items } }
+        );
+      }
+    }
+
+    res.status(200).json({ message: "Added to wishlist!" });
   } catch (err) {
-    console.error("❌ Error fetching product detail:", err);
-    res.status(500).json({ error: "Failed to fetch product detail." });
+    console.error("❌ Wishlist add error:", err);
+    res.status(500).json({ error: "Failed to add to wishlist." });
   }
 });
 
-// auction products
-app.get("/auctions", async (req, res) => {
+app.get("/wishlist", async (req, res) => {
+  let userEmail;
+
+  if (req.user && req.user.email) {
+    userEmail = req.user.email;
+  } else {
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith("Bearer ")) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const userId = decoded.id;
+
+      const user = await db
+        .collection("users")
+        .findOne({ _id: new ObjectId(userId) });
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found." });
+      }
+      userEmail = user.email;
+    } catch (err) {
+      console.error("❌ Wishlist fetch error:", err);
+      return res.status(401).json({ error: "Invalid or expired token" });
+    }
+  }
+
   try {
-    const auctions = await db.collection("auctions").find().toArray();
-    res.status(200).json(auctions);
+    const wishlist = await db.collection("wishlist").findOne({ userEmail });
+
+    res.status(200).json(wishlist || { userEmail, items: [] });
   } catch (err) {
-    console.error("❌ Error fetching products:", err);
-    res.status(500).json({ error: "Failed to fetch products." });
+    console.error("❌ Wishlist fetch error:", err);
+    res.status(500).json({ error: "Failed to fetch wishlist." });
+  }
+});
+
+app.delete("/wishlist/item", async (req, res) => {
+  const { productId, selectedColor } = req.body;
+  let userEmail = null;
+
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await db
+      .collection("users")
+      .findOne({ _id: new ObjectId(decoded.id) });
+
+    userEmail = user?.email;
+  }
+
+  if (!userEmail) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    // Remove the item from the wishlist array
+    await db.collection("wishlist").updateOne(
+      { userEmail },
+      {
+        $pull: {
+          items: {
+            productId,
+            selectedColor,
+          },
+        },
+      }
+    );
+
+    // Check if the wishlist is now empty
+    const updatedDoc = await db.collection("wishlist").findOne({ userEmail });
+
+    if (updatedDoc && updatedDoc.items.length === 0) {
+      // Delete the entire wishlist document
+      await db.collection("wishlist").deleteOne({ userEmail });
+    }
+
+    res.status(200).json({ message: "Item removed from wishlist." });
+  } catch (err) {
+    console.error("❌ Wishlist remove error:", err);
+    res.status(500).json({ error: "Failed to remove item from wishlist." });
   }
 });
 
