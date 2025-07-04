@@ -17,6 +17,7 @@ let db;
 const allowedOrigins = [
   "http://localhost:8080",
   "https://snatched-brown.vercel.app",
+  "https://snatched-zeta.vercel.app",
 ];
 
 var currentOrigin = "";
